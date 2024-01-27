@@ -1,8 +1,74 @@
-<img width="960" alt="Home" src="https://user-images.githubusercontent.com/96285027/235316694-52148226-09f7-494f-9012-6dec10d2980c.png">
-<img width="960" alt="House-living" src="https://user-images.githubusercontent.com/96285027/235316695-d4fbbb63-c890-427c-b133-645f85ef4774.png">
-<img width="960" alt="Login" src="https://user-images.githubusercontent.com/96285027/235316699-840e1497-3283-4cbd-8d74-0b3f4776b384.png">
-<img width="960" alt="Body" src="https://user-images.githubusercontent.com/96285027/235316690-ddaf3784-2032-4664-99be-4f14d7290dd9.png">
-<img width="960" alt="Kids" src="https://user-images.githubusercontent.com/96285027/235316697-ab638fc2-2350-4f41-92d5-8d391d8ce7fc.png">
-<img width="960" alt="men" src="https://user-images.githubusercontent.com/96285027/235316701-86bc22bb-00ee-4b52-b0a8-5f8236b687a3.png">
-<img width="960" alt="Women" src="https://user-images.githubusercontent.com/96285027/235316702-5fb0b3c4-b4bd-4f31-a904-ec39f51ffbff.png">
-<img width="960" alt="Footer" src="https://user-images.githubusercontent.com/96285027/235316693-470db710-4d14-4724-9af1-7879c2c46a2a.png">
+Creating and deploying a sample Node.js application on an Amazon EKS cluster using Terraform and Helm charts with High Availability (HA).
+
+Prerequisites:
+(1)AWS CLI installed and configured.
+(2)Terraform installed.
+(3)kubectl installed.
+(4)Helm installed.
+(6)A sample Node.js application with a Dockerfile.
+
+Steps:
+(1). Set up Node.js application:
+Create a Dockerfile for application.
+Build and push the Docker image to ECR repository.
+
+Install Terraform:
+sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
+
+wget -O- https://apt.releases.hashicorp.com/gpg | \
+gpg --dearmor | \
+sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+
+gpg --no-default-keyring \
+--keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg \
+--fingerprint
+
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
+https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
+sudo tee /etc/apt/sources.list.d/hashicorp.list
+sudo apt update
+
+(2). Set up Terraform:
+Create a directory for Terraform configuration.
+Create a main.tf file with EKS cluster configuration.
+vim main.tf
+provider.tf
+subnet.tf
+vpc.tf
+rout.tf
+sg.tf
+internetgw.tf
+iam.tf
+eks_cluster.tf
+eks_node_group.tf
+
+Use Following Commands to Create EKS Cluster Using Terraform:
+terraform init
+terraform validate
+terraform plan 
+terraform apply to create the EKS cluster.
+
+(3).AWS CLI installed and configured:
+
+curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+unzip awscli-bundle.zip
+
+sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+aws --version
+
+ssh -i Keyname UserName@publicIp
+Run aws configure
+And then put aws_access_key_id and aws_secret_key_id.
+
+(4).Configure kubectl:
+curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.29.0/2024-01-04/bin/linux/amd64/kubectl
+openssl sha1 -sha256 kubectl
+sha256sum -c kubectl.sha256
+chmod +x ./kubectl
+mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
+
+Use this command with your region and cluster name to setup kubectl:-
+aws eks --region ap-southeast-1 describe-cluster --name my-eks --query cluster.status
+aws eks --region ap-southeast-1 update-kubeconfig --name my-eks 
+kubectl get nodes
+kubectl get svc
