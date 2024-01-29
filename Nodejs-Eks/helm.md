@@ -3,7 +3,7 @@
 ```
 helm version
 
-I am using above version
+```
 
 2. Create Helm Charts
 
