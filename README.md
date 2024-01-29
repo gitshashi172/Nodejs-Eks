@@ -51,15 +51,15 @@ To uninstall:
 helm uninstall myntra-basic
 
 
-##### (4). Expose the application with NLB:
+### (4). Expose the application with NLB:
 Ensure that Helm charts create a Service of type LoadBalancer.
 The AWS Load Balancer Controller should automatically create an NLB for Service.
 
-###### (5). Verify the deployment:
+#### (5). Verify the deployment:
 
 kubectl get pods  
 
 kubectl get svc  #To check the status of deployment.
 
-Access application using the NLB URL.
+Access application using the NLB URL. localhost:3000
 This is a high-level overview, and may need to customize it based on specific application, requirements and architecture.
