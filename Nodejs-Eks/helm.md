@@ -3,10 +3,6 @@
 ```
 helm version
 
-version.BuildInfo{Version:"v3.13.0", GitCommit:"825e86f6a7a38cef1112bfa606e4127a706749b1", GitTreeState:"clean", GoVersion:"go1.21.1"}
-
-```
-
 I am using above version
 
 2. Create Helm Charts
